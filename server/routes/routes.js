@@ -1,10 +1,12 @@
 import express from 'express';
 import userRoutes from './user.routes.js';
+import authRoutes from './auth.routes.js';
 const router = express.Router();
 
 const baseURL = 'api/v1';
 
 
 router.use(`/${baseURL}/users`, userRoutes);
+router.use(`/${baseURL}/auth`, authRoutes);
 
 export default router;

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 export const dbConnect = () => {
         try {
-            mongoose.connect("mongodb+srv://youtube:youtube@cluster0.osxys8h.mongodb.net/socio-app");
+            mongoose.connect(process.env.DB_URL,);
             console.log("Connected to DB successfully!");
             
         } catch (error) {
