@@ -14,11 +14,12 @@ export const register = async (req, res) => {
             newUserser,
             message: 'Registration successful!' });
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ 
             error,
             message: "Registration failed!",     
         });
-        console.log(error);
+        
     }
 }
 
