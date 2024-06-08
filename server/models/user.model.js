@@ -1,7 +1,9 @@
-import e from "express";
+import express from "express";
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
+const app = express();
+app.use(express.json());
 const userSchema = new Schema({
     username: {
         type: String,
