@@ -1,29 +1,18 @@
 import UserModel from '../models/user.model.js';
 import bcrypt from 'bcrypt';
 
-
-export const register = async (req, res) => {
+export const register = async (body) => {
     
-    try {
-        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+        const hashedPassword = bcrypt.hashSync(body.password, 10);
         const newUserser = new UserModel({
-            username: req.body.username,
-            email: req.body.email,
+            username: body.username,
+            email: body.email,
             password: hashedPassword,
         });
 
-        const {Password, ...data} = newUserser._doc;
-        await newUserser.save();
-        return res.status(200).json({
-            data,
-            message: 'Registration successful!' });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ 
-            error,
-            message: "Registration failed!",     
-        });
         
-    }
-}
+        await newUserser.save();
+        
+   
+};
 

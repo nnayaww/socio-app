@@ -1,3 +1,4 @@
+import { register as registerUserService } from "../services/auth.service.js";
 
 export const register = async (req, res) => {
     
@@ -9,18 +10,14 @@ export const register = async (req, res) => {
             password: hashedPassword,
         });
 
-        const {Password, ...data} = newUserser._doc;
-        await newUserser.save();
-        return res.status(200).json({
+        const { password, ...data } = newUserser._doc;
+        await registerUserService(req.body);
+        res.status(200).json({
             data,
-            message: 'Registration successful!' });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ 
-            error,
-            message: "Registration failed!",     
+            message: "User has been registered",
         });
-        
+    } catch (error) {
+        res.status(500).json(error);
+        "User has not been registered";
     }
-}
-
+};
