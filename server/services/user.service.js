@@ -17,4 +17,12 @@ export const updateUser = async (userId, updateData) => {
     } catch (error) {
         throw error;
     }
-}
+};
+
+export const deleteUser = async (userId) => {
+        try {
+             await UserModel.findByIdAndDelete(userId);
+        } catch (error) {
+            throw error;
+        }
+    };
