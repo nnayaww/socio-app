@@ -4,14 +4,16 @@ export const register = async (req, res) => {
     
     try {
         const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-        const newUserser = new UserModel({
+        const newUser = new UserModel({
             username: req.body.username,
             email: req.body.email,
             password: hashedPassword,
         });
 
-        const { password, ...data } = newUserser._doc;
-        await registerUserService(req.body);
+        const { password, ...data } = newUser._doc;
+          await registerUserService(req.body);
+
+    
         res.status(200).json({
             data,
             message: "User has been registered",
@@ -19,5 +21,25 @@ export const register = async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
         "User has not been registered";
+    }
+};
+
+
+export const login = async (req, res) => {
+    try {
+        const loggedInUser = await loggedInUser(req.body);
+        res.status(200).json({
+            loggedInUser,
+            message: "User has been logged in",
+            loggedInUser,
+        });
+       
+    } catch (error) {
+        res.status(500).json
+        ({
+        error: error,
+        message: "User has not been logged in",
+        });
+        console.log(error);
     }
 };

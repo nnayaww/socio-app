@@ -12,7 +12,17 @@ export const register = async (body) => {
 
         
         await newUserser.save();
+        return newUserser;
         
    
+};
+
+
+export const loginUser = async (body) => {
+    const user = await UserModel.findOne({ email: body.email });
+    !user && res.status(404).json("User not found");
+    const validPassword = bcrypt.compareSync(body.password, user.password);
+    !validPassword && res.status(404).json("Wrong password");
+    return user;
 };
 
