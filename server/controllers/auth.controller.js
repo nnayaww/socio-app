@@ -28,10 +28,11 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const loggedInUser = await loggedInUser(req.body);
+        const { password, ...data } = loggedInUser._doc;
         res.status(200).json({
             loggedInUser,
             message: "User has been logged in",
-            loggedInUser,
+            data,
         });
        
     } catch (error) {
